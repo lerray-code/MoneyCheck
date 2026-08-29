@@ -1,14 +1,6 @@
 import { useState } from "react";
 import type { CurrencyCode } from "../../types/currency";
 
-interface CurrencyConverterProps {
-  currencies: readonly CurrencyCode[];
-  convert: (
-    amount: number,
-    from: CurrencyCode,
-    to: CurrencyCode
-  ) => number | null;
-}
 
 interface CurrencyConverterProps {
   currencies: readonly CurrencyCode[];

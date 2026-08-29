@@ -9,7 +9,7 @@ function StatWidget({
   title,
   value,
   suffix = "денег",
-  colorClass = " --color-text-primary",
+  colorClass = "--color-text-primary",
 }: StatWidgetProps) {
   return (
     <div className="surface rounded-lg shadow p-5">
