@@ -23,13 +23,13 @@ function Dashboard() {
     incomeByMonth,
     balanceHistory,
     recentTransactions,
+    reload,
   } = useDashboardData(user?.dummyJsonId);
 
   void refreshKey;
 
   function handleDataChanged() {
     setRefreshKey((prev) => prev + 1);
-    window.location.reload();
   }
 
   if (loading) {
