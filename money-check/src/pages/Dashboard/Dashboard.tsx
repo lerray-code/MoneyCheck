@@ -29,7 +29,7 @@ function Dashboard() {
   void refreshKey;
 
   function handleDataChanged() {
-    setRefreshKey((prev) => prev + 1);
+    reload();
   }
 
   if (loading) {
