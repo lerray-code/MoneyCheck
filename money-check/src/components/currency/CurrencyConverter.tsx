@@ -40,7 +40,7 @@ function CurrencyConverter({
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="border w-full p-2 rounded"
+            className="input"
           />
         </div>
 

@@ -67,6 +67,7 @@ function Budgets() {
   }
 
   async function handleFormSubmit(values: BudgetFormValues) {
+    console.log("СРАБОТАЛО", values); 
     if (!user) return;
     setSubmitting(true);
     try {
@@ -106,7 +107,8 @@ function Budgets() {
         <h1 className="text-2xl font-bold">Бюджеты</h1>
         <button
           onClick={openAddForm}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          type="button"
+          className="btn btn-primary"
         >
           + Создать бюджет
         </button>
@@ -122,7 +124,7 @@ function Budgets() {
     action={
       <button
         onClick={openAddForm}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="btn btn-primary"
       >
         + Создать бюджет
       </button>

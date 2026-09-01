@@ -50,7 +50,7 @@ function GoalForm({
         <input
           type="text"
           {...register("title")}
-          className="border w-full p-2 rounded"
+          className="input"
           placeholder="Например, Отпуск"
         />
         {errors.title && (
@@ -64,7 +64,7 @@ function GoalForm({
           type="number"
           step="0.01"
           {...register("targetAmount")}
-          className="border w-full p-2 rounded"
+          className="input"
         />
         {errors.targetAmount && (
           <p className="text-red-500 text-xs mt-1">
@@ -82,7 +82,7 @@ function GoalForm({
             type="number"
             step="0.01"
             {...register("currentAmount")}
-            className="border w-full p-2 rounded"
+            className="input"
           />
           {errors.currentAmount && (
             <p className="text-red-500 text-xs mt-1">
@@ -97,7 +97,7 @@ function GoalForm({
         <input
           type="date"
           {...register("deadline")}
-          className="border w-full p-2 rounded"
+          className="input"
         />
         {errors.deadline && (
           <p className="text-red-500 text-xs mt-1">
@@ -110,7 +110,7 @@ function GoalForm({
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 rounded border hover:bg-gray-100"
+          className="btn btn-secondary"
         >
           Отмена
         </button>

@@ -111,7 +111,7 @@ useEffect(() => {
         <h1 className="text-2xl font-bold">Расходы</h1>
         <button
           onClick={openAddForm}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+          className="btn btn-danger"
         >
           + Добавить расход
         </button>
@@ -144,7 +144,7 @@ useEffect(() => {
     action={
       <button
         onClick={openAddForm}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="btn btn-primary"
       >
         + Добавить расход
       </button>

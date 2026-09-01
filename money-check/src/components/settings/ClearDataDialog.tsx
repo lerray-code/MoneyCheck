@@ -34,13 +34,13 @@ function ClearDataDialog({
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="border w-full p-2 rounded mb-4"
+        className="input mb-4"
         placeholder={CONFIRM_WORD}
       />
       <div className="flex gap-2 justify-end">
         <button
           onClick={handleClose}
-          className="px-4 py-2 rounded border hover:bg-gray-100"
+          className="btn btn-secondary"
         >
           Отмена
         </button>

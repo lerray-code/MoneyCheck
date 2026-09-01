@@ -17,6 +17,8 @@ interface QuickActionsProps {
   onDataChanged: () => void;
 }
 
+
+
 function QuickActions({ onDataChanged }: QuickActionsProps) {
   const { user } = useAuth();
   const [activeModal, setActiveModal] = useState<ActiveModal>(null);
@@ -83,7 +85,7 @@ function QuickActions({ onDataChanged }: QuickActionsProps) {
         </button>
         <button
           onClick={() => setActiveModal("expense")}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+          className="btn btn-danger"
         >
           + Добавить расход
         </button>
@@ -93,6 +95,7 @@ function QuickActions({ onDataChanged }: QuickActionsProps) {
         >
           + Добавить цель
         </button>
+      
       </div>
 
       <Modal

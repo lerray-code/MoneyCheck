@@ -8,14 +8,17 @@ interface StatWidgetProps {
 function StatWidget({
   title,
   value,
-  suffix = "денег",
-  colorClass = "--color-text-primary",
+  suffix = "Денег",
+  colorClass = "text-primary",
 }: StatWidgetProps) {
   return (
-    <div className="surface rounded-lg shadow p-5">
-      <p className="text-sm text-secondary mb-1">{title}</p>
+    <div className="card card-hover p-5">
+      <p className="text-xs font-medium text-secondary uppercase tracking-wide mb-2">
+        {title}
+      </p>
       <p className={`text-2xl font-bold ${colorClass}`}>
-        {value.toLocaleString("ru-RU")} {suffix}
+        {value.toLocaleString("ru-RU")}{" "}
+        <span className="text-base font-medium text-muted">{suffix}</span>
       </p>
     </div>
   );

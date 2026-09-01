@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getIncomes } from "../api/incomeApi";
 import { getExpenses } from "../api/expenseApi";
 import { getBudgets } from "../api/budgetApi";
@@ -21,17 +21,31 @@ export function useDashboardData(userId: number | undefined) {
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const loadAll = useCallback(async () => {
     if (!userId) return;
 
+    setLoading(true);
+    const [incomesData, expensesData, budgetsData] = await Promise.all([
+      getIncomes(userId),
+      getExpenses(userId),
+      getBudgets(userId),
+    ]);
+    setIncomes(incomesData);
+    setExpenses(expensesData);
+    setBudgets(budgetsData);
+    setLoading(false);
+  }, [userId]);
+
+  useEffect(() => {
     let cancelled = false;
 
-    async function loadAll() {
+    async function run() {
+      if (!userId) return;
       setLoading(true);
       const [incomesData, expensesData, budgetsData] = await Promise.all([
-        getIncomes(userId!),
-        getExpenses(userId!),
-        getBudgets(userId!),
+        getIncomes(userId),
+        getExpenses(userId),
+        getBudgets(userId),
       ]);
       if (!cancelled) {
         setIncomes(incomesData);
@@ -41,7 +55,7 @@ export function useDashboardData(userId: number | undefined) {
       }
     }
 
-    loadAll();
+    run();
 
     return () => {
       cancelled = true;
@@ -81,8 +95,6 @@ export function useDashboardData(userId: number | undefined) {
     incomeByMonth,
     balanceHistory,
     recentTransactions,
-    reload: () => {
-     
-    },
+    reload: loadAll,
   };
 }

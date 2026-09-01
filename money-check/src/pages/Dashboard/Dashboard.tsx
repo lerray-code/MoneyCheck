@@ -29,7 +29,6 @@ function Dashboard() {
 
   function handleDataChanged() {
     setRefreshKey((prev) => prev + 1);
-    window.location.reload();
   }
 
   if (loading) {

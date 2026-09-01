@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
+
 const budgetSchema = z.object({
   category: z.string().min(1, "Выберите категорию"),
   limit: z.coerce.number().positive("Лимит должен быть больше 0"),
@@ -32,6 +33,7 @@ function BudgetForm({
   onCancel,
   submitting,
 }: BudgetFormProps) {
+  
   const form = useForm<BudgetFormInput, unknown, BudgetFormValues>({
     resolver: zodResolver(budgetSchema),
     defaultValues: {
@@ -45,12 +47,17 @@ function BudgetForm({
   const { errors } = formState;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+    <form
+    onSubmit={(e) => {
+      console.log("Форма сабмитится, preventDefault вызовется сейчас");
+      return handleSubmit(onSubmit)(e);
+    }}
+    className="flex flex-col gap-3">
       <div>
         <label className="block text-sm mb-1">Категория</label>
         <select
           {...register("category")}
-          className="border w-full p-2 rounded"
+          className="input"
         >
           {categories.map((cat) => (
             <option key={cat} value={cat}>
@@ -71,7 +78,7 @@ function BudgetForm({
           type="number"
           step="0.01"
           {...register("limit")}
-          className="border w-full p-2 rounded"
+          className="input"
         />
         {errors.limit && (
           <p className="text-red-500 text-xs mt-1">{errors.limit.message}</p>
@@ -80,7 +87,7 @@ function BudgetForm({
 
       <div>
         <label className="block text-sm mb-1">Период</label>
-        <select {...register("period")} className="border w-full p-2 rounded">
+        <select {...register("period")} className="input">
           {Object.entries(PERIOD_LABELS).map(([value, label]) => (
             <option key={value} value={value}>
               {label}
@@ -96,7 +103,7 @@ function BudgetForm({
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 rounded border hover:bg-gray-100"
+          className="btn btn-secondary"
         >
           Отмена
         </button>

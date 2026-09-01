@@ -48,7 +48,7 @@ return (
         type="number"
         step="0.01"
         {...register("amount")}
-        className="border w-full p-2 rounded"
+        className="input"
       />
       {errors.amount && (
         <p className="text-red-500 text-xs mt-1">{errors.amount.message}</p>
@@ -59,7 +59,7 @@ return (
       <label className="block text-sm mb-1">Категория</label>
       <select
         {...register("category")}
-        className="border w-full p-2 rounded"
+        className="input"
       >
         {categories.map((cat) => (
           <option key={cat} value={cat}>
@@ -79,7 +79,7 @@ return (
       <input
         type="date"
         {...register("date")}
-        className="border w-full p-2 rounded"
+        className="input"
       />
       {errors.date && (
         <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>
@@ -91,7 +91,7 @@ return (
       <input
         type="text"
         {...register("comment")}
-        className="border w-full p-2 rounded"
+        className="input"
         placeholder="Необязательно"
       />
       {errors.comment && (
@@ -105,7 +105,7 @@ return (
       <button
         type="button"
         onClick={onCancel}
-        className="px-4 py-2 rounded border hover:bg-gray-100"
+        className="btn btn-secondary"
       >
         Отмена
       </button>

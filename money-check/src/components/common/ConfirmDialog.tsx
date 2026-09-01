@@ -26,7 +26,7 @@ function ConfirmDialog({
         <div className="flex gap-2 justify-end">
           <button
             onClick={onCancel}
-            className="px-4 py-2 rounded border hover:bg-gray-100"
+            className="btn btn-secondary"
           >
             Отмена
           </button>

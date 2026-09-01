@@ -36,7 +36,7 @@ function ReplenishForm({ onSubmit, onCancel, submitting }: ReplenishFormProps) {
           type="number"
           step="0.01"
           {...register("amount")}
-          className="border w-full p-2 rounded"
+          className="input"
         />
         {errors.amount && (
           <p className="text-red-500 text-xs mt-1">{errors.amount.message}</p>
@@ -48,7 +48,7 @@ function ReplenishForm({ onSubmit, onCancel, submitting }: ReplenishFormProps) {
         <input
           type="date"
           {...register("date")}
-          className="border w-full p-2 rounded"
+          className="input"
         />
         {errors.date && (
           <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>
@@ -59,7 +59,7 @@ function ReplenishForm({ onSubmit, onCancel, submitting }: ReplenishFormProps) {
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 rounded border hover:bg-gray-100"
+          className="btn btn-secondary"
         >
           Отмена
         </button>

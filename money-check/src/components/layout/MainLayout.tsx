@@ -6,8 +6,7 @@ function MainLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-950 dark:text-gray-100 transition-colors">
-      {/* Затемнение фона на мобильных, когда меню открыто */}
+    <div className="min-h-screen surface-alt text-primary transition-colors">
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
@@ -15,29 +14,28 @@ function MainLayout() {
         />
       )}
 
-      {/* Сайдбар - теперь fixed всегда, независимо от размера экрана */}
       <div
-        className={`fixed top-0 left-0 h-screen w-56 z-50 transition-transform duration-200 ${
+        className={`fixed top-0 left-0 h-screen w-64 z-50 transition-transform duration-200 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         <Sidebar onNavigate={() => setIsSidebarOpen(false)} />
       </div>
 
-      {/* Контент справа - отступ слева на десктопе равен ширине сайдбара (w-56 = 14rem = 224px) */}
-      <div className="flex flex-col min-w-0 md:ml-56">
-        <header className="md:hidden bg-white dark:bg-gray-900 shadow p-4 flex items-center gap-3 sticky top-0 z-30">
+      <div className="flex flex-col min-w-0 md:ml-64">
+        <header className="md:hidden surface shadow-sm p-4 flex items-center gap-3 sticky top-0 z-30 border-b" style={{ borderColor: "var(--color-border)" }}>
           <button
+            type="button"
             onClick={() => setIsSidebarOpen(true)}
             className="text-2xl"
             aria-label="Открыть меню"
           >
             ☰
           </button>
-          <span className="font-bold">FinanceTracker</span>
+          <span className="font-semibold">FinanceTracker</span>
         </header>
 
-        <main className="flex-1 p-4 md:p-6 overflow-x-hidden">
+        <main className="flex-1 p-4 md:p-8 max-w-7xl w-full mx-auto overflow-x-hidden">
           <Outlet />
         </main>
       </div>
