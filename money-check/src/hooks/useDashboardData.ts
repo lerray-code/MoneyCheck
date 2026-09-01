@@ -21,45 +21,27 @@ export function useDashboardData(userId: number | undefined) {
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [loading, setLoading] = useState(true);
 
-  async function loadAll() {
+  // silent = true — обновляем данные в фоне, не показывая экран загрузки поверх готового интерфейса
+  async function loadAll(silent = false) {
     if (!userId) return;
-    setLoading(true);
+    if (!silent) setLoading(true);
+
     const [incomesData, expensesData, budgetsData] = await Promise.all([
       getIncomes(userId),
       getExpenses(userId),
       getBudgets(userId),
     ]);
+
     setIncomes(incomesData);
     setExpenses(expensesData);
     setBudgets(budgetsData);
-    setLoading(false);
+
+    if (!silent) setLoading(false);
   }
 
   useEffect(() => {
     if (!userId) return;
-
-    let cancelled = false;
-
-    async function initialLoad() {
-      setLoading(true);
-      const [incomesData, expensesData, budgetsData] = await Promise.all([
-        getIncomes(userId!),
-        getExpenses(userId!),
-        getBudgets(userId!),
-      ]);
-      if (!cancelled) {
-        setIncomes(incomesData);
-        setExpenses(expensesData);
-        setBudgets(budgetsData);
-        setLoading(false);
-      }
-    }
-
-    initialLoad();
-
-    return () => {
-      cancelled = true;
-    };
+    loadAll(false); // первая загрузка — показываем LoadingState
   }, [userId]);
 
   const currentYearMonth = getCurrentYearMonth();
@@ -95,6 +77,6 @@ export function useDashboardData(userId: number | undefined) {
     incomeByMonth,
     balanceHistory,
     recentTransactions,
-    reload: loadAll,
+    reload: () => loadAll(true), // фоновое обновление
   };
 }
