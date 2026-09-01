@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAuth } from "../../context/useAuth";
 import { useDashboardData } from "../../hooks/useDashboardData";
 import StatWidget from "../../components/dashboard/StatWidget";
@@ -11,7 +10,6 @@ import LoadingState from "../../components/common/LoadingState";
 
 function Dashboard() {
   const { user } = useAuth();
-  const [refreshKey, setRefreshKey] = useState(0);
 
   const {
     loading,
@@ -23,12 +21,12 @@ function Dashboard() {
     incomeByMonth,
     balanceHistory,
     recentTransactions,
+    reload,
   } = useDashboardData(user?.dummyJsonId);
 
-  void refreshKey;
 
   function handleDataChanged() {
-    setRefreshKey((prev) => prev + 1);
+    reload();
   }
 
   if (loading) {

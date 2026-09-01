@@ -10,6 +10,7 @@ import { createExpense } from "../../api/expenseApi";
 import { createGoal } from "../../api/goalApi";
 import type { IncomeCategory, ExpenseCategory } from "../../types/category";
 import { useAuth } from "../../context/useAuth";
+import toast from "react-hot-toast";
 
 type ActiveModal = "income" | "expense" | "goal" | null;
 
@@ -36,6 +37,7 @@ function QuickActions({ onDataChanged }: QuickActionsProps) {
       });
       setActiveModal(null);
       onDataChanged();
+      toast.success("Доход добавлен");
     } finally {
       setSubmitting(false);
     }
@@ -53,6 +55,7 @@ function QuickActions({ onDataChanged }: QuickActionsProps) {
       });
       setActiveModal(null);
       onDataChanged();
+      toast.success("Расход добавлен");
     } finally {
       setSubmitting(false);
     }
@@ -69,6 +72,7 @@ function QuickActions({ onDataChanged }: QuickActionsProps) {
       });
       setActiveModal(null);
       onDataChanged();
+      toast.success("Цель добавлена");
     } finally {
       setSubmitting(false);
     }
