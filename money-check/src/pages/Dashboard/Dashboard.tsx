@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAuth } from "../../context/useAuth";
 import { useDashboardData } from "../../hooks/useDashboardData";
 import StatWidget from "../../components/dashboard/StatWidget";
@@ -11,7 +10,6 @@ import LoadingState from "../../components/common/LoadingState";
 
 function Dashboard() {
   const { user } = useAuth();
-  const [refreshKey, setRefreshKey] = useState(0);
 
   const {
     loading,
@@ -26,7 +24,6 @@ function Dashboard() {
     reload,
   } = useDashboardData(user?.dummyJsonId);
 
-  void refreshKey;
 
   function handleDataChanged() {
     reload();
