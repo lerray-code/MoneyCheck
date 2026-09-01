@@ -21,12 +21,26 @@ export function useDashboardData(userId: number | undefined) {
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [loading, setLoading] = useState(true);
 
+  async function loadAll() {
+    if (!userId) return;
+    setLoading(true);
+    const [incomesData, expensesData, budgetsData] = await Promise.all([
+      getIncomes(userId),
+      getExpenses(userId),
+      getBudgets(userId),
+    ]);
+    setIncomes(incomesData);
+    setExpenses(expensesData);
+    setBudgets(budgetsData);
+    setLoading(false);
+  }
+
   useEffect(() => {
     if (!userId) return;
 
     let cancelled = false;
 
-    async function loadAll() {
+    async function initialLoad() {
       setLoading(true);
       const [incomesData, expensesData, budgetsData] = await Promise.all([
         getIncomes(userId!),
@@ -41,7 +55,7 @@ export function useDashboardData(userId: number | undefined) {
       }
     }
 
-    loadAll();
+    initialLoad();
 
     return () => {
       cancelled = true;
@@ -81,8 +95,6 @@ export function useDashboardData(userId: number | undefined) {
     incomeByMonth,
     balanceHistory,
     recentTransactions,
-    reload: () => {
-     
-    },
+    reload: loadAll,
   };
 }
