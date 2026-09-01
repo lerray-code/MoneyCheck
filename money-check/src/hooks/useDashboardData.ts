@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getIncomes } from "../api/incomeApi";
 import { getExpenses } from "../api/expenseApi";
 import { getBudgets } from "../api/budgetApi";
